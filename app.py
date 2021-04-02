@@ -50,3 +50,7 @@ def precipiation():
 
 
 #Start & Start/End - JSON list, TMIN/TAVG/TMAX for both
+
+
+if __name__ == "__main__":
+    app.run(debug=True)

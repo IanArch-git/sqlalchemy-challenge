@@ -25,15 +25,15 @@ def Home():
         f"/api/v1.0/precipitation<br/>"
         f"/api/v1.0/stations<br/>"
         f"/api/v1.0/tobs<br/>"
-        f"/api/v1.0/[start_date format:yyyy-mm-dd]<br/>"
-        f"/api/v1.0/[start_date format:yyyy-mm-dd]/[end_date format:yyyy-mm-dd]<br/>"
+        f"/api/v1.0/start<br/>"
+        f"/api/v1.0/start/end<br/>"
     )
 
 # Precipitation - query results & conversion
-@app.route("/precipitation")
-def precipiation():
+@app.route("/api/v1.0/precipitation")
+def precipitation():
     session = Session(engine)
-    results = session.query(measure.date, measurem.prcp).all()
+    results = session.query(measure.date, measure.prcp).all()
     session.close()
     dateprecip_list = []
     for date, prcp in results:

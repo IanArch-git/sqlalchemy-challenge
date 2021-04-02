@@ -44,7 +44,13 @@ def precipitation():
     return jsonify(dateprecip_list)
 
 #Stations - JSON list of stations
-
+@app.route("/api/v1.0/stations")
+def stations():
+    session = Session(engine)
+    stations_query = session.query(station.name).all()
+    session.close()
+    stations_list = list(np.ravel(stations_query))
+    return jsonify(stations_list)
 
 #Tobs - query results & JSON list
 

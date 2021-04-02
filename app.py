@@ -21,7 +21,7 @@ app = Flask(__name__)
 @app.route("/")
 def Home():
     return (
-        f"Available Routes:<br/>"
+        f"List of Available Routes:<br/>"
         f"/api/v1.0/precipitation<br/>"
         f"/api/v1.0/stations<br/>"
         f"/api/v1.0/tobs<br/>"
@@ -30,7 +30,18 @@ def Home():
     )
 
 # Precipitation - query results & conversion
-
+@app.route("/precipitation")
+def precipiation():
+    session = Session(engine)
+    results = session.query(measure.date, measurem.prcp).all()
+    session.close()
+    dateprecip_list = []
+    for date, prcp in results:
+        dpdict = {}
+        dpdict["date"] = date
+        dpdict["prcp"] = prcp
+        dateprecip_list.append(dpdict)
+    return jsonify(dateprecip_list)
 
 #Stations - JSON list of stations
 
